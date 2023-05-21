@@ -1,0 +1,1 @@
+final urlBase = Uri.https('pokeapi.co', 'api/v2/pokemon');
