@@ -12,18 +12,15 @@ Este projeto foi desenvolvido para o seguinte desafio: https://github.com/snapfi
 - Responsividade - o aplicativo precisa ser adaptável a todos os tamanhos de tela.
 
 ## Como executar o projeto
-Primeiramente deve-se instalar o Dart seguindo a documentação do mesmo, link abaixo:
-https://dart.dev/get-dart
-
-Após instalação do Dart, instalar o flutter seguindo documentação abaixo:
-https://flutter.dev/docs/get-started/install
-
-Com as ferramentas devidamente instaladas é necessário fazer o Download desse repositório.
-Após o download abra o projeto com Android Studio ou com VSCode.
-Execute o comando "flutter pub get" para baixar as bibliotecas do pubspec.yaml.
-Abra um emulador Android ou iOS.
-Após execute o comando "flutter run".
+- Primeiramente deve-se instalar o Dart seguindo a documentação do mesmo: https://dart.dev/get-dart
+- Após instalação do Dart, instalar o flutter seguindo documentação: https://flutter.dev/docs/get-started/install
+- Com as ferramentas devidamente instaladas é necessário fazer o Download desse repositório.
+- Após o download abra o projeto com Android Studio ou com VSCode.
+- Execute o comando "flutter pub get" para baixar as bibliotecas do pubspec.yaml.
+- Abra um emulador Android ou iOS.
+- Após execute o comando "flutter run".
 
 ## Prints de algumas telas
 
-[<img src="assets/tela_categoria.jpg" width="800"/>](images/tela_categoria.jpg)
+[<img src="assets/prints/pokedex_list.png" width="390"/>](assets/prints/pokedex_list.png)
+[<img src="assets/prints/pokemon_detail.png" width="390"/>](assets/prints/pokemon_detail.png)
