@@ -22,5 +22,5 @@ Este projeto foi desenvolvido para o seguinte desafio: https://github.com/snapfi
 
 ## Prints de algumas telas
 
-[<img src="assets/prints/pokedex_list.png" width="390"/>](assets/prints/pokedex_list.png)
-[<img src="assets/prints/pokemon_detail.png" width="390"/>](assets/prints/pokemon_detail.png)
+[<img src="prints/pokedex_list.png" width="390"/>](prints/pokedex_list.png)
+[<img src="prints/pokemon_detail.png" width="390"/>](prints/pokemon_detail.png)
