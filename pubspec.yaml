@@ -21,6 +21,7 @@ dependencies:
   stream_transform: ^2.1.0
   custom_pop_up_menu: ^1.2.4
   google_fonts: ^4.0.4
+  cached_network_image: ^3.2.3
 
 dev_dependencies:
   flutter_test:

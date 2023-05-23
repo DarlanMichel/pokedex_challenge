@@ -56,8 +56,19 @@ class _PokedexListPageState extends State<PokedexListPage> {
           margin: const EdgeInsets.all(4),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 24),
           decoration: BoxDecoration(
-            color: Colors.white,
             borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.25),
+                blurStyle: BlurStyle.inner,
+              ),
+              const BoxShadow(
+                  color: Colors.white,
+                  blurStyle: BlurStyle.inner,
+                  spreadRadius: 1.0,
+                  blurRadius: 3.0,
+                  offset: Offset(0, 1)),
+            ],
           ),
           child: BlocBuilder<PokedexListBloc, PokedexListState>(
               builder: (context, state) {
@@ -93,8 +104,10 @@ class _PokedexListPageState extends State<PokedexListPage> {
                             );
                     });
               case PokedexListStatus.initial:
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
                 );
             }
           }),

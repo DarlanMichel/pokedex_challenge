@@ -1,4 +1,5 @@
 import 'package:challenge_pokedex/app/pokedex/domain/entities/pokemon_entity.dart';
+import 'package:challenge_pokedex/app/pokedex/presentation/widgets/about_pokemon.dart';
 import 'package:challenge_pokedex/app/pokedex/presentation/widgets/stats_bar.dart';
 import 'package:challenge_pokedex/app/pokedex/presentation/widgets/stats_label.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,18 @@ class PokemonDetailCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.25),
+            blurStyle: BlurStyle.inner,
+          ),
+          const BoxShadow(
+              color: Colors.white,
+              blurStyle: BlurStyle.inner,
+              spreadRadius: 1.0,
+              blurRadius: 3.0,
+              offset: Offset(0, 1)),
+        ],
       ),
       child: Column(
         children: [
@@ -74,101 +86,7 @@ class PokemonDetailCard extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/weight.png',
-                        height: 16,
-                        width: 16,
-                        color: const Color(0xff1D1D1D),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                          '${((pokemonEntity.weight ?? 0) * 0.1).toStringAsFixed(1).replaceAll('.', ',')} kg')
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Weight',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: const Color(0xff666666), fontSize: 8),
-                  )
-                ],
-              ),
-              Container(
-                height: 48,
-                width: 1,
-                color: const Color(0xffE0E0E0),
-              ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/straighten.png',
-                        height: 16,
-                        width: 16,
-                        color: const Color(0xff1D1D1D),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                          '${((pokemonEntity.height ?? 0) * 0.1).toStringAsFixed(1).replaceAll('.', ',')} m')
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Height',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: const Color(0xff666666), fontSize: 8),
-                  )
-                ],
-              ),
-              Container(
-                height: 48,
-                width: 1,
-                color: const Color(0xffE0E0E0),
-              ),
-              Column(
-                children: [
-                  (pokemonEntity.moves?.length ?? 0) == 0
-                      ? const SizedBox()
-                      : Text(
-                          pokemonEntity.moves?[0].ability?.name ?? '',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: const Color(0xff1D1D1D)),
-                        ),
-                  (pokemonEntity.moves?.length ?? 0) <= 1
-                      ? const SizedBox()
-                      : Text(
-                          pokemonEntity.moves?[1].ability?.name ?? '',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: const Color(0xff1D1D1D)),
-                        ),
-                  const SizedBox(height: 12),
-                  Text(
-                    'Moves',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: const Color(0xff666666), fontSize: 8),
-                  )
-                ],
-              ),
-            ],
-          ),
+          AboutPokemon(pokemonEntity: pokemonEntity),
           const SizedBox(height: 16),
           Text(
             'Base Stats',

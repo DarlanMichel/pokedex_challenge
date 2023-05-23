@@ -49,8 +49,20 @@ class _HeaderPokedexState extends State<HeaderPokedex> {
                   child: Container(
                     height: 32,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurStyle: BlurStyle.inner,
+                        ),
+                        const BoxShadow(
+                            color: Colors.white,
+                            blurStyle: BlurStyle.inner,
+                            spreadRadius: 1.0,
+                            blurRadius: 3.0,
+                            offset: Offset(0, 1)),
+                      ],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     child: TextFormField(
                       controller: TextEditingController(),
                       decoration: InputDecoration(

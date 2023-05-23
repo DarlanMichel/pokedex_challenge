@@ -14,6 +14,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pokédex',
       theme: ThemeData(
+        primaryColor: const Color(0xffDC0A2D),
         textTheme: TextTheme(
           displayLarge: TextStyle(
             fontSize: 24,

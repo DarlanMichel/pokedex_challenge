@@ -49,7 +49,18 @@ class _CustomPopupState extends State<CustomPopup> {
               margin: const EdgeInsets.all(4),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.25),
+                    blurStyle: BlurStyle.inner,
+                  ),
+                  const BoxShadow(
+                      color: Colors.white,
+                      blurStyle: BlurStyle.inner,
+                      spreadRadius: 1.0,
+                      blurRadius: 3.0,
+                      offset: Offset(0, 1)),
+                ],
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
@@ -121,10 +132,25 @@ class _CustomPopupState extends State<CustomPopup> {
           ],
         ),
       ),
-      child: const CircleAvatar(
-        radius: 16,
-        backgroundColor: Colors.white,
-        child: Icon(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurStyle: BlurStyle.inner,
+            ),
+            const BoxShadow(
+                color: Colors.white,
+                blurStyle: BlurStyle.inner,
+                spreadRadius: 1.0,
+                blurRadius: 3.0,
+                offset: Offset(0, 1)),
+          ],
+        ),
+        height: 32,
+        width: 32,
+        child: const Icon(
           Icons.tag,
           size: 16,
           color: Color(0xffDC0A2D),

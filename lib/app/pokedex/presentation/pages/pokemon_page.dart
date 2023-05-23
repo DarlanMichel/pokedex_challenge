@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:challenge_pokedex/app/pokedex/domain/entities/pokemon_entity.dart';
 import 'package:challenge_pokedex/app/pokedex/presentation/bloc/pokemon_bloc.dart';
 import 'package:challenge_pokedex/app/pokedex/presentation/widgets/pokemon_detail_card.dart';
@@ -117,12 +118,13 @@ class _PokemonPageState extends State<PokemonPage> {
                                           .toUpperCase() +
                                       (state.pokemonEntity?.name ?? '')
                                           .substring(1),
+                                  maxLines: 1,
                                   style: Theme.of(context)
                                       .textTheme
                                       .displayLarge
                                       ?.copyWith(
-                                        color: Colors.white,
-                                      ),
+                                          color: Colors.white,
+                                          overflow: TextOverflow.ellipsis),
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -141,7 +143,8 @@ class _PokemonPageState extends State<PokemonPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            state.pokemonEntity?.number == 1
+                            state.pokemonEntity?.number == 1 ||
+                                    state.pokemonEntity?.number == 10001
                                 ? const SizedBox()
                                 : Padding(
                                     padding: const EdgeInsets.only(left: 24),
@@ -165,14 +168,26 @@ class _PokemonPageState extends State<PokemonPage> {
                                       ),
                                     ),
                                   ),
-                            Image.network(
-                              state.pokemonEntity?.image?.other?.official
-                                      ?.front ??
+                            CachedNetworkImage(
+                              imageUrl: state.pokemonEntity?.image?.other
+                                      ?.official?.front ??
                                   '',
                               height: 200,
                               width: 200,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      CircularProgressIndicator(
+                                color: Theme.of(context).primaryColor,
+                                value: downloadProgress.progress,
+                              ),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.image,
+                                size: 80,
+                                color: Colors.grey,
+                              ),
                             ),
-                            state.pokemonEntity?.number == 10271
+                            state.pokemonEntity?.number == 1010 ||
+                                    state.pokemonEntity?.number == 10271
                                 ? const SizedBox()
                                 : Padding(
                                     padding: const EdgeInsets.only(right: 24),
@@ -203,8 +218,10 @@ class _PokemonPageState extends State<PokemonPage> {
                   ],
                 );
               case PokemonStatus.initial:
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
                 );
             }
           }),

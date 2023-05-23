@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:challenge_pokedex/app/pokedex/domain/entities/pokedex_list_entity.dart';
 import 'package:challenge_pokedex/app/pokedex/presentation/bloc/pokemon_bloc.dart';
 import 'package:challenge_pokedex/app/pokedex/presentation/pages/pokemon_page.dart';
@@ -20,8 +21,7 @@ class _CardPokemonState extends State<CardPokemon> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PokemonBloc, PokemonState>(
-      builder: (context, state) {
+    return BlocBuilder<PokemonBloc, PokemonState>(builder: (context, state) {
       switch (state.status) {
         case PokemonStatus.failure:
           return Container();
@@ -72,21 +72,34 @@ class _CardPokemonState extends State<CardPokemon> {
                           ),
                         ),
                       ),
-                      Image.network(
-                        state.pokemonEntity?.image?.other?.official?.front ??
+                      CachedNetworkImage(
+                        imageUrl: state
+                                .pokemonEntity?.image?.other?.official?.front ??
                             '',
-                        height: 72,
-                        width: 72,
+                        height: 63,
+                        width: 63,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => CircularProgressIndicator(
+                              color: Theme.of(context).primaryColor,
+                              value: downloadProgress.progress,
+                            ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image,
+                          size: 20,
+                          color: Colors.grey,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 4),
                         child: Text(
                           (widget.pokedexEntity.name ?? '')[0].toUpperCase() +
                               (widget.pokedexEntity.name ?? '').substring(1),
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: const Color(0xff1D1D1D),
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
+                                  color: const Color(0xff1D1D1D),
+                                  overflow: TextOverflow.ellipsis),
                         ),
                       ),
                     ],
@@ -96,8 +109,10 @@ class _CardPokemonState extends State<CardPokemon> {
             ),
           );
         case PokemonStatus.initial:
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).primaryColor,
+            ),
           );
       }
     });
