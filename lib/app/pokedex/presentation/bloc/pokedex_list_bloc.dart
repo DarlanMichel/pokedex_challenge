@@ -17,7 +17,7 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class PokedexListBloc extends Bloc<PokedexListEvent, PokedexListState> {
-  final GetAllUsecase getAllUsecase;
+  final IGetAllUsecase getAllUsecase;
 
   PokedexListBloc({
     required this.getAllUsecase,
@@ -41,32 +41,38 @@ class PokedexListBloc extends Bloc<PokedexListEvent, PokedexListState> {
     try {
       if (state.status == PokedexListStatus.initial) {
         final result = await getAllUsecase();
-
-        result.fold(
-          (l) => emit(
+        if (result.failure != null) {
+          emit(
             state.copyWith(status: PokedexListStatus.failure),
-          ),
-          (r) => emit(state.copyWith(
-            status: PokedexListStatus.success,
-            pokedexListEntity: r,
-            hasReachedMax: false,
-          )),
-        );
+          );
+        } else if (result.success != null) {
+          emit(
+            state.copyWith(
+              status: PokedexListStatus.success,
+              pokedexListEntity: result.success,
+              hasReachedMax: false,
+            ),
+          );
+        }
       }
       final result =
           await getAllUsecase(offset: state.pokedexListEntity.length);
-      result.fold(
-        (l) => emit(
+      if (result.failure != null) {
+        emit(
           state.copyWith(status: PokedexListStatus.failure),
-        ),
-        (r) => emit(r.isEmpty
-            ? state.copyWith(hasReachedMax: true)
-            : state.copyWith(
-                status: PokedexListStatus.success,
-                pokedexListEntity: List.of(state.pokedexListEntity)..addAll(r),
-                hasReachedMax: false,
-              )),
-      );
+        );
+      } else if ((result.success ?? []).isNotEmpty) {
+        emit(
+          (result.success ?? []).isEmpty
+              ? state.copyWith(hasReachedMax: true)
+              : state.copyWith(
+                  status: PokedexListStatus.success,
+                  pokedexListEntity: List.of(state.pokedexListEntity)
+                    ..addAll(result.success ?? []),
+                  hasReachedMax: false,
+                ),
+        );
+      }
     } catch (e) {
       emit(
         state.copyWith(status: PokedexListStatus.failure),
@@ -86,7 +92,6 @@ class PokedexListBloc extends Bloc<PokedexListEvent, PokedexListState> {
             ..sort((a, b) => (a.name ?? '').compareTo(b.name ?? '')),
         ),
       );
-      
     } else {
       emit(
         state.copyWith(

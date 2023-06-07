@@ -1,6 +1,6 @@
-import 'package:challenge_pokedex/app/pokedex/data/dtos/pokemon_dto.dart';
-import 'package:dartz/dartz.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/pokemon_entity.dart';
 
-abstract class GetPokemonDatasource {
-  Future<Either<Exception, PokemonDto>> call({required String id});
+abstract class IGetPokemonDatasource {
+  Future<({Exception? failure, PokemonEntity? success})> call(
+      {required String id});
 }

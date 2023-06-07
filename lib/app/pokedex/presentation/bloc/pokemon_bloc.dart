@@ -17,7 +17,7 @@ EventTransformer<E> throttleDroppable<E>(Duration duration) {
 }
 
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
-  final GetPokemonUsecase getPokemonUsecase;
+  final IGetPokemonUsecase getPokemonUsecase;
 
   PokemonBloc({
     required this.getPokemonUsecase,
@@ -32,17 +32,18 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> {
       GetPokemon event, Emitter<PokemonState> emit) async {
     try {
       final result = await getPokemonUsecase(id: event.id);
-      result.fold(
-        (l) => emit(
+      if (result.failure != null) {
+        emit(
           state.copyWith(status: PokemonStatus.failure),
-        ),
-        (r) => emit(
+        );
+      } else if (result.success != null) {
+        emit(
           state.copyWith(
             status: PokemonStatus.success,
-            pokemonEntity: r,
+            pokemonEntity: result.success,
           ),
-        ),
-      );
+        );
+      }
     } catch (e) {
       emit(
         state.copyWith(status: PokemonStatus.failure),

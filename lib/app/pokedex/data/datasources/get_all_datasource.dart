@@ -1,6 +1,6 @@
-import 'package:challenge_pokedex/app/pokedex/data/dtos/pokedex_list_dto.dart';
-import 'package:dartz/dartz.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/pokedex_list_entity.dart';
 
-abstract class GetAllDatasource {
-  Future<Either<Exception, List<PokedexListDto>>> call({int? offset});
+abstract class IGetAllDatasource {
+  Future<({Exception? failure, List<PokedexListEntity>? success})> call(
+      {int? offset});
 }

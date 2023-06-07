@@ -1,3 +1,8 @@
+import 'package:challenge_pokedex/app/pokedex/domain/entities/ability_entity.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/sprite_entity.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/stats_entity.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/type_entity.dart';
+
 class PokemonEntity {
   int? number;
   String? name;
@@ -18,57 +23,4 @@ class PokemonEntity {
     this.image,
     this.stats,
   });
-}
-
-class TypesEntity {
-  int? slot;
-  TypeEntity? type;
-
-  TypesEntity({this.slot, this.type});
-}
-
-class TypeEntity {
-  String? name;
-  String? url;
-  TypeEntity({this.name, this.url});
-}
-
-class AbilitiesEntity {
-  AbilityEntity? ability;
-  AbilitiesEntity({this.ability});
-}
-
-class AbilityEntity {
-  String? name;
-  AbilityEntity({this.name});
-}
-
-class SpriteEntity {
-  OtherEntity? other;
-  SpriteEntity({this.other});
-}
-
-class OtherEntity {
-  OfficialEntity? official;
-  OtherEntity({this.official});
-}
-
-class OfficialEntity {
-  String? front;
-  String? shiny;
-
-  OfficialEntity({this.front, this.shiny});
-}
-
-class StatsEntity {
-  int? base;
-  StatEntity? stat;
-
-  StatsEntity({this.base, this.stat});
-}
-
-class StatEntity {
-  String? name;
-
-  StatEntity({this.name});
 }

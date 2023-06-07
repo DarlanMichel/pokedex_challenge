@@ -78,11 +78,6 @@ class _CardPokemonState extends State<CardPokemon> {
                             '',
                         height: 63,
                         width: 63,
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) => CircularProgressIndicator(
-                              color: Theme.of(context).primaryColor,
-                              value: downloadProgress.progress,
-                            ),
                         errorWidget: (context, url, error) => const Icon(
                           Icons.image,
                           size: 20,

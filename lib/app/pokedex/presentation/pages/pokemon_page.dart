@@ -174,12 +174,6 @@ class _PokemonPageState extends State<PokemonPage> {
                                   '',
                               height: 200,
                               width: 200,
-                              progressIndicatorBuilder:
-                                  (context, url, downloadProgress) =>
-                                      CircularProgressIndicator(
-                                color: Theme.of(context).primaryColor,
-                                value: downloadProgress.progress,
-                              ),
                               errorWidget: (context, url, error) => const Icon(
                                 Icons.image,
                                 size: 80,
