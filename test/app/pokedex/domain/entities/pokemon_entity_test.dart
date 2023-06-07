@@ -1,4 +1,8 @@
+import 'package:challenge_pokedex/app/pokedex/domain/entities/ability_entity.dart';
 import 'package:challenge_pokedex/app/pokedex/domain/entities/pokemon_entity.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/sprite_entity.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/stats_entity.dart';
+import 'package:challenge_pokedex/app/pokedex/domain/entities/type_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 main() {
