@@ -4,9 +4,13 @@ import 'package:challenge_pokedex/app/pokedex/data/datasources/get_all_datasourc
 import 'package:challenge_pokedex/app/pokedex/data/adapters/pokedex_list_adapter.dart';
 import 'package:challenge_pokedex/app/pokedex/domain/entities/pokedex_list_entity.dart';
 import 'package:challenge_pokedex/core/shared/url_base.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class GetAllDatasourceHttp implements IGetAllDatasource {
+  final Client http;
+
+  GetAllDatasourceHttp(this.http);
+
   @override
   Future<({Exception? failure, List<PokedexListEntity>? success})> call(
       {int? offset}) async {

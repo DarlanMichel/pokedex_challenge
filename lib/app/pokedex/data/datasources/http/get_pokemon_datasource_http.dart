@@ -1,12 +1,15 @@
 import 'dart:convert';
-
 import 'package:challenge_pokedex/app/pokedex/data/datasources/get_pokemon_datasource.dart';
 import 'package:challenge_pokedex/app/pokedex/data/adapters/pokemon_adapter.dart';
 import 'package:challenge_pokedex/app/pokedex/domain/entities/pokemon_entity.dart';
 import 'package:challenge_pokedex/core/shared/url_base.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class GetPokemonDatasourceHttp implements IGetPokemonDatasource {
+  final Client http;
+
+  GetPokemonDatasourceHttp(this.http);
+
   @override
   Future<({Exception? failure, PokemonEntity? success})> call(
       {required String id}) async {

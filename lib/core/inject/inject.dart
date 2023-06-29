@@ -13,16 +13,21 @@ import 'package:challenge_pokedex/app/pokedex/domain/usecases/get_pokemon_usecas
 import 'package:challenge_pokedex/app/pokedex/presentation/bloc/pokedex_list_bloc.dart';
 import 'package:challenge_pokedex/app/pokedex/presentation/bloc/pokemon_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 
 class Inject {
   static void init() {
     GetIt getIt = GetIt.instance;
 
+    getIt.registerLazySingleton<http.Client>(
+      () => http.Client(),
+    );
+
     getIt.registerLazySingleton<IGetAllDatasource>(
-      () => GetAllDatasourceHttp(),
+      () => GetAllDatasourceHttp(getIt()),
     );
     getIt.registerLazySingleton<IGetPokemonDatasource>(
-      () => GetPokemonDatasourceHttp(),
+      () => GetPokemonDatasourceHttp(getIt()),
     );
 
     getIt.registerLazySingleton<IGetAllRepository>(

@@ -10,4 +10,8 @@ class PokedexListAdapter {
   static List<PokedexListEntity> fromList(List list) {
     return list.map((e) => fromJson(e)).toList();
   }
+
+  static Map<String, dynamic> toJson(PokedexListEntity entity) {
+    return {"name": entity.name, "url": entity.url};
+  }
 }
